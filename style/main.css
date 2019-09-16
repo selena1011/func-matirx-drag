@@ -27,12 +27,20 @@
         5px 0px 10px 5px #dcdcdc,    /* 右边 */
         0px 5px 10px 5px #dcdcdc;    /* 下边 */
     cursor: pointer;
+}
+.drag-box-translate3d{    
     transform: translate3d(0, 0, 1px);
     -moz-transform: translate3d(0, 0, 1px);
     -webkit-transform: translate3d(0, 0, 1px);
+    will-change: transform;
+    -moz-will-change: transform;
+    -webkit-will-change: transform;
 }
 .drag-box-absolute{
     position: absolute;
     left: 0;
     top: 0;
+    will-change: top, left;
+    -moz-will-change: top, left;
+    -webkit-will-change: top, left;
 }
