@@ -1,3 +1,6 @@
+import '../style/reset.css'
+import '../style/main.css'
+
 import dragMatrix from './drag.matrix'
 import dragAbsolute from './drag.absolute'
 
