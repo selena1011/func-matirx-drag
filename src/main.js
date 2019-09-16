@@ -1,5 +1,5 @@
-import DragMatrix from './drag.matrix'
-import DragAbsolute from './drag.absolute'
+import dragMatrix from './drag.matrix'
+import dragAbsolute from './drag.absolute'
 
-new DragMatrix( document.getElementById( 'matrixDragBox' ) )
-new DragAbsolute( document.getElementById( 'absoluteDragBox' ) )
+dragMatrix( document.getElementById( 'matrixDragBox' ) )
+dragAbsolute( document.getElementById( 'absoluteDragBox' ) )

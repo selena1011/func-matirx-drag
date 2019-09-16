@@ -1,8 +1,9 @@
 /** 
+ * 获取元素计算后的样式
  * @param {Element} el 目标节点
  * @param {String} attr 目标样式规则
  * @returns {string}
- * */ 
+ **/ 
 export function getStyle(
     el,
     attr
