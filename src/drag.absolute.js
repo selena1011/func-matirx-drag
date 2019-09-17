@@ -16,7 +16,7 @@ function initBindEvent(){
     // 绑定mousedown事件 
     ELEMENT.addEventListener('mousedown', bindMouseDownEvent, false)        
     // 绑定mouseup事件
-    ELEMENT.addEventListener('mouseup', bindMouseUpEvent, false)
+    document.addEventListener('mouseup', bindMouseUpEvent, false)
 }
 
 
