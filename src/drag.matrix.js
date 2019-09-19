@@ -3,7 +3,7 @@ import * as util from './util'
 
 /* 定义距离尺寸的存储池 */
 let E_SIZER = {}
-/* 定义 */
+/* 定义元素变量 */
 let ELEMENT = null
 
 
@@ -33,10 +33,13 @@ function bindMouseDownEvent(
 
     // 解析matrix的正则
     let matrix3dReg1 = /^matrix3d\((?:[-\d.]+,\s*){12}([-\d.]+),\s*([-\d.]+)(?:,\s*[-\d.]+){2}\)/,
-        matrix3dReg2 = /^matrix\((?:[-\d.]+,\s*){4}([-\d.]+),\s*([-\d.]+)\)$/
+        matrixReg = /^matrix\((?:[-\d.]+,\s*){4}([-\d.]+),\s*([-\d.]+)\)$/
     // 获取解析后的transform样式属性值
-    let matrix3dSourceValue = util.getStyle(evte.target, 'transform')
-    let matrix3dArrValue = matrix3dSourceValue.match( matrix3dReg1 ) || matrix3dSourceValue.match( matrix3dReg2 )
+    let matrix3dSourceValue = util.getStyle(
+        evte.target, 
+        'transform'
+    )
+    let matrix3dArrValue = matrix3dSourceValue.match( matrix3dReg1 ) || matrix3dSourceValue.match( matrixReg )
     
     // 记录鼠标点击时的坐标
     E_SIZER['clientX'] = evte.clientX
@@ -72,7 +75,7 @@ function bindMouseMoveEvent(
     ELEMENT.style.transform = 
     ELEMENT.style.mozTransform = 
     ELEMENT.style.webkitTransform = 
-    `translate3d(${moveX}px, ${moveY}px, 1px) scale(1)`
+    `translate3d(${moveX}px, ${moveY}px, 1px)`
 }  
 
 

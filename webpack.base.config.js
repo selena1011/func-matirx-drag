@@ -104,10 +104,9 @@ const WebpackBaseConfig = {
             },
             hash: true,
             template: Path.resolve(__dirname, './template/index.html'),
-            filename: 'index.html'
+            filename: '../index.html'
         }),
-        //new ExtractTextPlugin( './assets/css/main.css' ),  // 当前输出目录的为基准
-        new ExtractTextPlugin( './css/[name].css' ),  // 当前输出目录的为基准
+        new ExtractTextPlugin( './main.css' ),  // 当前输出目录的为基准
         // new PurifyCSSWebpackPlugin({
         //     // 配置一个paths
         //     // 主要是需找html模板
