@@ -13,6 +13,7 @@ let ELEMENT = null
  * @returns {undefined}
  **/
 function initBindEvent(){
+    ELEMENT = el
     // 绑定mousedown事件 
     ELEMENT.addEventListener('mousedown', bindMouseDownEvent, false)        
     // 绑定mouseup事件
@@ -97,8 +98,7 @@ function bindMouseUpEvent(
 
 
 
-export default function dragMatrix( el ){
-    ELEMENT = el
+export default function dragMatrix( el ){    
     // 执行初始化方法
     initBindEvent( el )
 }

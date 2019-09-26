@@ -13,6 +13,7 @@ let ELEMENT = null
  * @returns {undefined}
  **/
 function initBindEvent(){
+    ELEMENT = el
     // 绑定mousedown事件 
     ELEMENT.addEventListener('mousedown', bindMouseDownEvent, false)        
     // 绑定mouseup事件
@@ -79,7 +80,6 @@ function bindMouseUpEvent(
 
 
 export default function dragAbsolute( el ){
-    ELEMENT = el
     // 执行初始化方法
     initBindEvent( el )
 }

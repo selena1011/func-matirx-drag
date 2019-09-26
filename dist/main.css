@@ -1,3 +1,49 @@
+.container{
+    min-width: 768px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+
+.drag-box{
+    width: 120px;
+    height: 120px;
+    border: 1px solid #aeaeae;
+    border-radius: 4px;
+    background-color: #efefef;
+    box-shadow:   
+        0px -5px 10px 5px #dcdcdc,   /* 上边 */
+        -5px 0px 10px 5px #dcdcdc,   /* 左边 */
+        5px 0px 10px 5px #dcdcdc,    /* 右边 */
+        0px 5px 10px 5px #dcdcdc;    /* 下边 */
+    -moz-box-shadow:   
+        0px -5px 10px 5px #dcdcdc,   /* 上边 */
+        -5px 0px 10px 5px #dcdcdc,   /* 左边 */
+        5px 0px 10px 5px #dcdcdc,    /* 右边 */
+        0px 5px 10px 5px #dcdcdc;    /* 下边 */
+    -webkit-box-shadow:   
+        0px -5px 10px 5px #dcdcdc,   /* 上边 */
+        -5px 0px 10px 5px #dcdcdc,   /* 左边 */
+        5px 0px 10px 5px #dcdcdc,    /* 右边 */
+        0px 5px 10px 5px #dcdcdc;    /* 下边 */
+    cursor: pointer;
+}
+.drag-box-translate3d{    
+    transform: translate3d(0, 0, 1px);
+    -moz-transform: translate3d(0, 0, 1px);
+    -webkit-transform: translate3d(0, 0, 1px);
+    will-change: transform;
+    -moz-will-change: transform;
+    -webkit-will-change: transform;
+}
+.drag-box-absolute{
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: top, left;
+    -moz-will-change: top, left;
+    -webkit-will-change: top, left;
+}
 /****************************** 重置样式 ******************************/
 * {
     padding: 0; margin: 0; outline: 0; box-sizing: border-box; background-color: transparent;
@@ -194,51 +240,5 @@ input::-webkit-inner-spin-button{
 }
 .clearfix::after{ 
 	content: ""; display: block; clear: both; 
-}.container{
-    min-width: 768px;
-    max-width: 1440px;
-    margin: 0 auto;
 }
-
-
-.drag-box{
-    width: 120px;
-    height: 120px;
-    border: 1px solid #aeaeae;
-    border-radius: 4px;
-    background-color: #efefef;
-    box-shadow:   
-        0px -5px 10px 5px #dcdcdc,   /* 上边 */
-        -5px 0px 10px 5px #dcdcdc,   /* 左边 */
-        5px 0px 10px 5px #dcdcdc,    /* 右边 */
-        0px 5px 10px 5px #dcdcdc;    /* 下边 */
-    -moz-box-shadow:   
-        0px -5px 10px 5px #dcdcdc,   /* 上边 */
-        -5px 0px 10px 5px #dcdcdc,   /* 左边 */
-        5px 0px 10px 5px #dcdcdc,    /* 右边 */
-        0px 5px 10px 5px #dcdcdc;    /* 下边 */
-    -webkit-box-shadow:   
-        0px -5px 10px 5px #dcdcdc,   /* 上边 */
-        -5px 0px 10px 5px #dcdcdc,   /* 左边 */
-        5px 0px 10px 5px #dcdcdc,    /* 右边 */
-        0px 5px 10px 5px #dcdcdc;    /* 下边 */
-    cursor: pointer;
-}
-.drag-box-translate3d{    
-    transform: translate3d(0, 0, 1px);
-    -moz-transform: translate3d(0, 0, 1px);
-    -webkit-transform: translate3d(0, 0, 1px);
-    will-change: transform;
-    -moz-will-change: transform;
-    -webkit-will-change: transform;
-}
-.drag-box-absolute{
-    position: absolute;
-    left: 0;
-    top: 0;
-    will-change: top, left;
-    -moz-will-change: top, left;
-    -webkit-will-change: top, left;
-}
-
 /*# sourceMappingURL=main.css.map*/
