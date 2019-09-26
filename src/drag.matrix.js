@@ -12,7 +12,7 @@ let ELEMENT = null
  * @param {MouseEvent} evte 鼠标事件对象
  * @returns {undefined}
  **/
-function initBindEvent(){
+function initBindEvent( el ){
     ELEMENT = el
     // 绑定mousedown事件 
     ELEMENT.addEventListener('mousedown', bindMouseDownEvent, false)        
