@@ -1,21 +1,32 @@
-const Glob =  require( 'glob' );
-const Path = require( 'path' );
-const UglifyPlugin = require( 'uglifyjs-webpack-plugin' );
-const HtmlPlugin = require( 'html-webpack-plugin' );
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
-const PurifyCSSWebpackPlugin = require( 'purifycss-webpack' );
-const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
+const Path = require( 'path' )
+const Webpack = require( 'webpack' )
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
+const OptimizeCssAssetsWebpackPlugin = require( 'optimize-css-assets-webpack-plugin' )  
 
+const _now = now()
 
-const WebpackBaseConfig = {
-    mode: 'development',
-    devtool: '#source-map',
+function now(){
+    const d = new Date()
+    const arr = [
+        d.getFullYear(),
+        d.getMonth() + 1,
+        d.getDate(),
+        d.getHours(),
+        d.getMinutes(),
+        d.getSeconds()
+    ]
+    return arr.map(( item )=>{
+        return item > 9 ? String( item ) : '0' + String( item )
+    }).join( '' )
+}
+
+module.exports = {
+    _now: _now,    
     entry: {
         main: './src/main.js'
     },
     output: {
-        path: Path.resolve(__dirname, './dist/'),
-        filename: 'build.js'
+        path: Path.join(__dirname, `/dist/${_now}`)
     },
     module: {
         rules: [
@@ -26,20 +37,27 @@ const WebpackBaseConfig = {
                         loader: 'babel-loader'
                     }
                 ],
-                exclude: /node_modules/
-            }, {
+                include: /src/,  // 仅包含
+                exclude: /node_modules/  // 排除目录
+            },
+            {
+                test: /\.less/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'less-loader'
+                ]
+            },
+            {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader'
-                        }, {
-                            loader: 'postcss-loader'
-                        }
-                    ],
-                    fallback: 'style-loader'
-                })
-            }, {
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader'
+                ]
+            }, 
+            {
                 test: /\.(png|jpg|jpeg|gif)$/,
                 use: [
                     {
@@ -48,80 +66,33 @@ const WebpackBaseConfig = {
                             limit: 1024,
                             fallback: 'file-loader',
                             name: '[name].[hash].[ext]',  // 指定图片文件输出文件名                                
-                            outputPath: './images',  // 指定图片文件输出路径   
-                            publicPath: '../images/',  // 指定CSS文件中的url路径前缀                                                  
+                            // outputPath: './images/',  // 指定图片文件输出路径
+                            publicPath: './',  // 指定CSS文件中的url路径前缀(一般写CDN路径)                                             
                         }
                     }
                 ]
-            }, {
+            }, 
+            {
                 test: /\.(html|htm)$/,
                 use: [
                     {
                         loader: 'html-withimg-loader'
                     }
                 ]
-            }, {
-                test: /\.less$/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader'
-                        }, {
-                            loader: 'less-loader'
-                        }
-                    ],
-                    fallback: 'style-loader'
-                })
-            }, {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader'
-                        }, {
-                            loader: 'sass-loader'
-                        }
-                    ],
-                    fallback: 'style-loader'
-                })
             }
-        ]
+        ]  // 模块解析规则
     },
-    plugins: [
-        new UglifyPlugin(),
-        new HtmlPlugin({
-            minify: {
-                removeComments: true,
-                // collapseWhitespace: true,
-                // removeRedundantAttributes: true,
-                // useShortDoctype: true,
-                // removeEmptyAttributes: true,
-                // removeStyleLinkTypeAttributes: true,
-                // keepClosingSlash: true,
-                // minifyJS: true,
-                // minifyCSS: true,
-                // minifyURLs: true
-            },
-            hash: true,
-            template: Path.resolve(__dirname, './template/index.html'),
-            filename: '../index.html'
-        }),
-        new ExtractTextPlugin( './main.css' ),  // 当前输出目录的为基准
-        // new PurifyCSSWebpackPlugin({
-        //     // 配置一个paths
-        //     // 主要是需找html模板
-        //     // purifycss根据这个配置会遍历你的文件, 查找哪些css被使用了。
-        //     paths: Glob.sync( Path.resolve(__dirname, '../src/*.html') )
-        // })
-    ],
-    devServer: {
-        host: '127.0.0.1',
-        port: '10010',
-        compress: true,
-        hot: true,
-        open: true,
-        watchContentBase: true
+    resolve: {
+        modules: [
+            Path.resolve( 'node_modules' )
+        ],
+        extensions: [
+            '.js', 
+            '.css', 
+            '.json'
+        ]
+    },  // 解析第三方模块包依赖
+    externals: {
+        //...
     }
-};
-
-module.exports = WebpackBaseConfig
+}
